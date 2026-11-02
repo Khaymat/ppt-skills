@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.etching_cache/
+examples/.etching_cache/
+examples/preview/Slide*.PNG
+*.pptx
+!examples/demo.pptx
