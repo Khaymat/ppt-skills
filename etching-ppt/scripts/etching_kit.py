@@ -234,15 +234,26 @@ class Deck:
                       align="center", line=1.3)
         return s
 
-    def section(self, label, title, items: Sequence[str] = (), **kw):
-        """Divider slide: small spaced label, big title, a short rule, italic contents list."""
+    def section(self, label, title, items: Sequence[str] = (), image=None, **kw):
+        """Divider slide: small spaced label, big title, a short rule, italic contents list.
+
+        With `image`, the text block moves to the left half and the picture fills the right half.
+        """
         s = self.slide(**kw)
         m = self.t.margin
-        self.text(s, m, 1.6, self.W - 2 * m, 0.5, label.upper(), 18, color=self.t.ink2, align="center", spacing=600)
-        self.text(s, m, 2.15, self.W - 2 * m, 0.8, title.upper(), 40, align="center", spacing=450)
-        self.rule(s, self.W / 2 - 2.1, 3.15, self.W / 2 + 2.1)
+        if image:
+            tx, tw = 0.6, 6.4
+            self.pic(s, image, 7.3, 1.6, 5.2, 4.4)
+        else:
+            tx, tw = m, self.W - 2 * m
+        cx = tx + tw / 2
+        self.text(s, tx, 1.6, tw, 0.5, label.upper(), 18, color=self.t.ink2, align="center", spacing=600)
+        self.text(s, tx, 2.15, tw, 0.8, title.upper(), (34 if len(title) <= 12 else 26) if image else 40, align="center",
+                  spacing=450)
+        self.rule(s, cx - 2.1, 3.15, cx + 2.1)
         if items:
-            self.text(s, 1.5, 3.4, self.W - 3.0, 2.8, "\n".join(items), 16, italic=True, color=self.t.ink2,
+            ix, iw = (tx, tw) if image else (1.5, self.W - 3.0)
+            self.text(s, ix, 3.4, iw, 2.8, "\n".join(items), 16, italic=True, color=self.t.ink2,
                       align="center", line=1.35)
         return s
 

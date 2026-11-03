@@ -10,7 +10,7 @@ Image values: a path relative to the spec, `"placeholder:skyline"`, `"placeholde
 top-left, for example "draft for review").
 
 ## section
-`label` ("Part I"), `title`, `items` (italic contents list).
+`label` ("Part I"), `title`, `items` (italic contents list), optional `image` (about 4:3; the text block then moves to the left half).
 
 ## panels
 `panels`: list of `{"label", "body", "caption", "image", "size"}`. Use `body` for text, `image` for an illustration;
